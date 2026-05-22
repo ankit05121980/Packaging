@@ -6,7 +6,6 @@ import {
   OrbitControls,
   Environment,
   ContactShadows,
-  Grid,
   PerspectiveCamera,
 } from "@react-three/drei";
 import { BoxMesh } from "./box-mesh";
@@ -17,6 +16,14 @@ function LoadingFallback() {
       <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color="#D4A574" wireframe />
     </mesh>
+  );
+}
+
+function GroundGrid() {
+  return (
+    <group position={[0, -1.2, 0]}>
+      <gridHelper args={[20, 40, "#334155", "#1e293b"]} />
+    </group>
   );
 }
 
@@ -48,13 +55,8 @@ export function EditorScene() {
       <pointLight position={[0, 5, 0]} intensity={0.3} />
 
       <Suspense fallback={<LoadingFallback />}>
-        {/* Environment map for PBR reflections */}
         <Environment preset="studio" />
-
-        {/* The box */}
         <BoxMesh />
-
-        {/* Ground */}
         <ContactShadows
           position={[0, -1.2, 0]}
           opacity={0.4}
@@ -62,19 +64,7 @@ export function EditorScene() {
           blur={2}
           far={4}
         />
-        <Grid
-          position={[0, -1.2, 0]}
-          args={[20, 20]}
-          cellSize={0.5}
-          cellThickness={0.5}
-          cellColor="#334155"
-          sectionSize={2}
-          sectionThickness={1}
-          sectionColor="#475569"
-          fadeDistance={15}
-          fadeStrength={1}
-          infiniteGrid
-        />
+        <GroundGrid />
       </Suspense>
 
       <OrbitControls
