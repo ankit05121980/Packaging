@@ -1,0 +1,103 @@
+Module,Feature ID,Feature Name,Description,FE Hours,BE Hours,AI Hours,Total Hours,Priority,Status,Complexity,Notes
+,,,,,,,,,,
+MODULE 1: DATA ARCHITECTURE & AUTH,,,,,,,,,,,
+M1,M1-01,Database Schema Design,"Design & create all PostgreSQL tables (users, companies, products, variants, orders, etc.)",0,16,0,16,P0,Done,Medium,"8 tables with enums, indexes, constraints"
+M1,M1-02,Row Level Security Policies,"RLS policies for all tables ensuring user-scoped data access",0,8,0,8,P0,Done,Medium,Security-critical - needs thorough testing
+M1,M1-03,Database Triggers & Functions,"Auto-update timestamps, order/brief number generators",0,6,0,6,P0,Done,Low,Standard trigger patterns
+M1,M1-04,Seed Data & Migrations,"Product catalog seed data, migration scripts",0,4,0,4,P0,Done,Low,6 products with 15 variants
+M1,M1-05,TypeScript Type Definitions,"Complete TS interfaces matching all DB tables & enums",4,0,0,4,P0,Done,Low,Must stay in sync with schema
+M1,M1-06,Supabase Client Setup,"Client initialization, auth helpers, storage config",2,4,0,6,P0,Done,Low,Client + server-side clients
+M1,M1-07,User Authentication (Supabase Auth),"Sign up, sign in, OAuth (Google/GitHub), password reset, email verification",16,8,0,24,P0,Pending,Medium,Supabase Auth + custom profile creation
+M1,M1-08,User Profile Management,"Profile page, avatar upload, address management, preferences",12,6,0,18,P1,Pending,Medium,CRUD operations + file upload
+M1,M1-09,Company/B2B Account Setup,"Company registration, VAT validation, team member invites",16,12,0,28,P1,Pending,High,VAT API integration + multi-user company
+,,,,,,,,,,
+MODULE 2: PRODUCT CATALOG & CONFIGURATOR,,,,,,,,,,,
+M2,M2-01,Homepage - Hero & Layout,"Responsive hero section, nav header, footer, CTA sections",16,0,0,16,P0,Done,Medium,Framer Motion animations
+M2,M2-02,Product Catalog Page,"Grid/list views, search, category filters, sorting",14,4,0,18,P0,Done,Medium,Client-side filtering now; needs server-side for scale
+M2,M2-03,Material Selector Component,"Radio cards with eco labels, material metadata display",6,0,0,6,P0,Done,Low,3 material types with rich UI
+M2,M2-04,Dimension Selector Component,"Preset sizes toggle + custom sliders with min/max enforcement",10,0,0,10,P0,Done,Medium,Slider + input sync with validation
+M2,M2-05,Quantity Selector + Discount Tiers,"Step buttons, volume discount tier visualization, savings prompts",8,0,0,8,P0,Done,Medium,4 discount tiers with interactive UI
+M2,M2-06,Print Type Selector,"Unprinted/Single/Full-color selection with price indicators",4,0,0,4,P0,Done,Low,3 options with surcharge display
+M2,M2-07,Finish Selector,"Matte/Glossy/Foil/Spot UV/Embossed grid selection",4,0,0,4,P0,Done,Low,Dynamic based on variant availability
+M2,M2-08,Dynamic Pricing Engine,"Surface area formula, volume discounts, print surcharges, setup fee amortization",4,8,0,12,P0,Done,High,"Core business logic - A=2*(LW+WD+LD), tiered discounts"
+M2,M2-09,Pricing Summary Panel,"Real-time unit/total price, delivery estimate, sustainability impact, cashback display",10,0,0,10,P0,Done,Medium,Animated price transitions
+M2,M2-10,Product Gallery/Viewer,"Multi-view image carousel with material-reactive styling, dimension overlay",10,0,0,10,P0,Done,Medium,4 views with animated transitions
+M2,M2-11,Product Configuration Page,"Full 3-column layout composing all selector components",8,2,0,10,P0,Done,Medium,Sticky sidebar + accordion layout
+M2,M2-12,Server-Side Product Data,"API routes for products/variants with pagination, Supabase queries",4,12,0,16,P1,Pending,Medium,Replace mock data with real DB queries
+M2,M2-13,Product Search (Full-Text),"PostgreSQL full-text search on product name/description/features",4,8,0,12,P2,Pending,Medium,pg_trgm or tsvector indexing
+M2,M2-14,AI-Powered Product Recommendations,"Suggest products based on user history, industry, order patterns",8,8,24,40,P3,Pending,High,ML model for collaborative filtering or embeddings-based
+,,,,,,,,,,
+MODULE 3: 3D PACKAGING EDITOR,,,,,,,,,,,
+M3,M3-01,3D Scene Setup (R3F),"Canvas, PBR lighting, environment map, orbit controls, shadows",12,0,0,12,P0,Done,High,React Three Fiber + drei
+M3,M3-02,Reactive Box Mesh,"3D box scaled to dimensions from Zustand store",8,0,0,8,P0,Done,Medium,Real-time dimension binding
+M3,M3-03,Face Texture Mapping System,"Per-face 512x512 HTML Canvas textures mapped to box geometry",16,0,0,16,P0,Done,High,6-face canvas generation + UV mapping
+M3,M3-04,Face Selector UI,"6-face grid selector (Front/Back/Top/Bottom/Left/Right)",4,0,0,4,P0,Done,Low,Active face highlight on mesh
+M3,M3-05,Color Picker Tool,"16 presets + full hex color picker for base material",6,0,0,6,P0,Done,Low,react-colorful integration
+M3,M3-06,Image Upload & Placement,"Upload PNG/SVG/JPG, position/scale/rotation sliders per face",14,4,0,18,P0,Done,High,FileReader + canvas rendering + Supabase Storage
+M3,M3-07,Text Layer Engine,"Add/edit rich text with fonts, colors, size, position, rotation",14,0,0,14,P0,Done,High,8 fonts, per-face text layers
+M3,M3-08,Dimension Controls,"Length/Width/Depth sliders with live 3D mesh update",6,0,0,6,P0,Done,Medium,20-600mm range with step controls
+M3,M3-09,Material & Finish Controls,"Kraft/White/Bleached + 5 finishes + 3 print types in editor",6,0,0,6,P0,Done,Low,Affects mesh material properties
+M3,M3-10,Editor Header Actions,"Save Draft, Export PNG, Add to Cart buttons",8,4,0,12,P0,Done,Medium,Canvas screenshot + cart integration
+M3,M3-11,Collapsible Sidebar,"Icon rail + expandable panel with 6 tool tabs",8,0,0,8,P0,Done,Medium,Responsive collapse/expand
+M3,M3-12,Design Persistence (Supabase),"Save/load designs to user_designs table with full JSON state",6,10,0,16,P1,Pending,Medium,JSONB serialization of editor state
+M3,M3-13,Dieline PDF Export,"Generate proper dieline PDF with fold lines, bleed area, cut marks",16,8,0,24,P2,Pending,High,PDF generation library + print-ready specs
+M3,M3-14,Advanced Texture Features,"Gradient fills, pattern overlays, opacity controls per layer",20,0,0,20,P2,Pending,High,Extended canvas rendering pipeline
+M3,M3-15,Drag & Drop on 3D Mesh,"Click directly on 3D face to select, drag elements on mesh surface",24,0,0,24,P2,Pending,Very High,Raycasting + UV coordinate mapping
+M3,M3-16,Undo/Redo System,"Full undo/redo stack for all editor actions",12,0,0,12,P2,Pending,Medium,Command pattern on Zustand store
+M3,M3-17,AI Logo Generation,"Generate logo/design suggestions using AI image generation API",8,12,20,40,P3,Pending,High,"DALL-E/Stable Diffusion API, prompt engineering"
+M3,M3-18,AI Color Palette Suggestions,"Suggest brand-matched color palettes from uploaded logo",4,4,16,24,P3,Pending,Medium,Color extraction + harmony algorithms
+M3,M3-19,AI Design Templates,"Auto-generate packaging designs from brand name/industry",8,8,24,40,P3,Pending,High,Template generation with brand context
+,,,,,,,,,,
+MODULE 4: B2B ENTERPRISE (PACKHELP PLUS),,,,,,,,,,,
+M4,M4-01,Multi-Step Brief Wizard - Step 1,"Packaging specs: category multi-select, sizing, annual volume",12,4,0,16,P1,Pending,Medium,Multi-step form with validation
+M4,M4-02,Multi-Step Brief Wizard - Step 2,"Logistics: printing requests, warehousing, split-shipment config",12,4,0,16,P1,Pending,Medium,Complex conditional form fields
+M4,M4-03,Multi-Step Brief Wizard - Step 3,"Document dropzone: dieline upload, brand guides, vector files",10,8,0,18,P1,Pending,Medium,Multi-file upload to Supabase Storage
+M4,M4-04,Multi-Step Brief Wizard - Step 4,"Submission confirmation, acknowledgment email trigger",6,8,0,14,P1,Pending,Medium,Email template + webhook notification
+M4,M4-05,B2B Dashboard - Brief Tracking,"Status timeline (Under Review → Quote Ready → Sample → Production)",16,8,0,24,P1,Pending,High,Real-time status updates via Supabase Realtime
+M4,M4-06,B2B Quote Management,"View/accept/reject quotes, compare pricing options",14,10,0,24,P1,Pending,High,Quote versioning + approval workflow
+M4,M4-07,Custom Invoicing (Stripe),"Generate corporate invoices with NET-30/60 payment terms",6,16,0,22,P1,Pending,High,Stripe Invoicing API + PDF generation
+M4,M4-08,Account Manager Assignment,"Internal admin assigns account manager, notes, follow-ups",8,8,0,16,P2,Pending,Medium,Admin panel feature
+M4,M4-09,AI Brief Analysis,"Auto-extract specs from uploaded documents, suggest products",6,8,24,38,P3,Pending,Very High,"OCR/NLP on PDFs, GPT-based extraction"
+M4,M4-10,AI Volume Pricing Optimization,"Suggest optimal order quantities/schedules to minimize cost",4,8,20,32,P3,Pending,High,Optimization algorithm + historical data analysis
+,,,,,,,,,,
+MODULE 5: CART & CHECKOUT,,,,,,,,,,,
+M5,M5-01,Smart Shopping Cart,"Add/remove/update items, sample orders ($15 flat), persistence",12,4,0,16,P0,Done,Medium,Zustand with localStorage persistence
+M5,M5-02,Sustainability Impact Display,"Carbon offset calculator, trees planted counter in cart",4,2,0,6,P0,Done,Low,Calculation based on box quantity
+M5,M5-03,Packhelp Wallet - Balance Display,"Show wallet balance, apply credits slider at checkout",8,4,0,12,P0,Done,Medium,Slider UI + credit application logic
+M5,M5-04,Stripe Checkout Session API,"Create checkout session with line items, metadata, redirect URLs",4,12,0,16,P0,Done,High,Stripe API integration
+M5,M5-05,VAT/Tax Calculation,"Dynamic EU/UK VAT based on country + valid VAT ID exemption",4,10,0,14,P0,Done,High,VAT validation API + tax rules engine
+M5,M5-06,Stripe Webhook Handler,"Payment confirmation, order status update, wallet cashback credit",2,14,0,16,P1,Pending,High,Webhook signature verification + idempotency
+M5,M5-07,Wallet Cashback Processing,"5% credit on successful payment, debit on usage, ledger entries",2,10,0,12,P1,Pending,Medium,Transaction atomicity required
+M5,M5-08,Order Confirmation Page,"Order summary, tracking info, next steps, email trigger",8,6,0,14,P1,Pending,Medium,Dynamic content based on order type
+M5,M5-09,Order History & Tracking,"List past orders, status timeline, tracking link integration",14,8,0,22,P1,Pending,Medium,Filterable order list + detail views
+M5,M5-10,Reorder Functionality,"One-click reorder from past orders with same configuration",6,6,0,12,P2,Pending,Low,Clone order items to cart
+M5,M5-11,Multi-Currency Support,"USD/EUR/GBP with real-time exchange rates",8,10,0,18,P2,Pending,High,Currency conversion API + Stripe multi-currency
+M5,M5-12,AI Delivery Time Prediction,"Predict accurate delivery dates based on production load, location",4,8,16,28,P3,Pending,High,ML model trained on historical order data
+,,,,,,,,,,
+MODULE 6: ADMIN & OPERATIONS (NOT YET BUILT),,,,,,,,,,,
+M6,M6-01,Admin Dashboard,"Overview metrics: revenue, orders, active users, conversion rates",20,12,0,32,P1,Pending,High,Charts/graphs + real-time data
+M6,M6-02,Product Management CRUD,"Add/edit/delete products and variants from admin panel",16,10,0,26,P1,Pending,Medium,Form-based CRUD with image upload
+M6,M6-03,Order Management,"View/update order status, production stages, assign tracking",16,10,0,26,P1,Pending,Medium,Status workflow + bulk actions
+M6,M6-04,Customer Management,"View customer profiles, order history, wallet balance, notes",12,8,0,20,P2,Pending,Medium,Search + filter + detail views
+M6,M6-05,Analytics & Reporting,"Sales reports, product performance, customer segmentation",16,12,8,36,P2,Pending,High,Data aggregation + visualization
+M6,M6-06,AI Demand Forecasting,"Predict product demand by category/season for inventory planning",4,8,32,44,P3,Pending,Very High,Time-series forecasting model
+M6,M6-07,AI Customer Churn Prediction,"Identify at-risk customers, trigger retention campaigns",4,8,28,40,P3,Pending,Very High,Classification model + email triggers
+,,,,,,,,,,
+MODULE 7: QUALITY & INFRASTRUCTURE,,,,,,,,,,,
+M7,M7-01,Responsive Design Polish,"Mobile/tablet optimization across all pages",24,0,0,24,P1,Pending,Medium,Touch interactions + breakpoint testing
+M7,M7-02,Performance Optimization,"Image optimization, code splitting, lazy loading, caching",12,8,0,20,P1,Pending,Medium,Lighthouse score optimization
+M7,M7-03,SEO Implementation,"Meta tags, Open Graph, structured data, sitemap, robots.txt",8,4,0,12,P1,Pending,Low,Next.js metadata API
+M7,M7-04,Error Handling & Monitoring,"Global error boundaries, Sentry integration, error pages",8,8,0,16,P1,Pending,Medium,Error tracking + alerting
+M7,M7-05,Unit & Integration Tests,"Component tests (Vitest/RTL), API route tests, E2E (Playwright)",24,16,0,40,P1,Pending,High,Comprehensive test coverage
+M7,M7-06,CI/CD Pipeline,"GitHub Actions: lint, test, build, deploy to Vercel",4,8,0,12,P1,Pending,Medium,Automated deployment pipeline
+M7,M7-07,Accessibility (WCAG 2.1 AA),"Screen reader support, keyboard navigation, color contrast",16,0,0,16,P2,Pending,Medium,Audit + remediation
+M7,M7-08,Internationalization (i18n),"Multi-language support (EN, DE, FR, ES, PL)",20,8,4,32,P3,Pending,High,next-intl + translation management
+,,,,,,,,,,
+SUMMARY,,,,,,,,,,,
+,,"TOTAL - All Features (61 features)",,FE: 610,BE: 376,AI: 216,"GRAND TOTAL: 1202",,,,
+,,"TOTAL - Done (Module 1-3 core)",,FE: 248,BE: 80,AI: 0,"DONE: 328",,,,
+,,"TOTAL - Remaining",,FE: 362,BE: 296,AI: 216,"REMAINING: 874",,,,
+,,"TOTAL - P0 (Must Have)",,FE: 248,BE: 80,AI: 0,"P0 TOTAL: 328",,,,
+,,"TOTAL - P1 (Should Have)",,FE: 224,BE: 184,AI: 8,"P1 TOTAL: 416",,,,
+,,"TOTAL - P2 (Nice to Have)",,FE: 102,BE: 64,AI: 8,"P2 TOTAL: 174",,,,
+,,"TOTAL - P3 (AI/Future)",,FE: 54,BE: 72,AI: 204,"P3 TOTAL: 330",,,,
